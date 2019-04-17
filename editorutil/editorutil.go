@@ -6,7 +6,7 @@ import (
 )
 
 // OpenProjectInEditor opens project with editor configured via env $EDITOR
-// and open the file if provided (with suppoeted editores)
+// and open the file if provided (with supported editores)
 func OpenProjectInEditor(projectPath, filename string) {
 	var cmd *exec.Cmd
 
@@ -17,5 +17,14 @@ func OpenProjectInEditor(projectPath, filename string) {
 		cmd = exec.Command(editor, projectPath)
 	}
 
+	cmd.Start()
+}
+
+// OpenFileInEditor opens a file with editor configured via env $EDITOR
+func OpenFileInEditor(filepath string) {
+	editor := os.Getenv("EDITOR")
+
+	var cmd *exec.Cmd
+	cmd = exec.Command(editor, filepath)
 	cmd.Start()
 }
